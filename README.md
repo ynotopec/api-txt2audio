@@ -93,10 +93,10 @@ Assurez-vous que votre domaine (`api.example.com`) pointe vers l'adresse IP de v
 flowchart LR
     subgraph Kubernetes Cluster
         direction LR
-        Ingress[Ingress NGINX<br/>+ TLS cert-manager]
-        Service[Service ClusterIP]
-        App[FastAPI<br/>api-txt2audio]
-        Model[Kokoro-82M<br/>(Hugging Face)]
+        Ingress["Ingress NGINX<br/>+ TLS cert-manager"]
+        Service["Service ClusterIP"]
+        App["FastAPI<br/>api-txt2audio"]
+        Model["Kokoro-82M<br/>(Hugging Face)"]
     end
 
     Client((Client HTTPS)) -->|Requête /synthesize| Ingress
