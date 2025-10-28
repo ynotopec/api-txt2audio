@@ -84,3 +84,25 @@ Assurez-vous que votre domaine (`api.example.com`) pointe vers l'adresse IP de v
    kubectl get ingress
    kubectl describe certificate
    ```
+
+---
+
+## 🧭 Diagramme d'architecture
+
+```mermaid
+flowchart LR
+    subgraph Kubernetes Cluster
+        direction LR
+        Ingress[Ingress NGINX<br/>+ TLS cert-manager]
+        Service[Service ClusterIP]
+        App[FastAPI<br/>api-txt2audio]
+        Model[Kokoro-82M<br/>(Hugging Face)]
+    end
+
+    Client((Client HTTPS)) -->|Requête /synthesize| Ingress
+    Ingress --> Service
+    Service --> App
+    App -->|Texte| Model
+    Model -->|Audio WAV/MP3| App
+    App -->|Réponse audio| Client
+```
